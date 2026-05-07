@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: pedidos-service
+  namespace: pedidos-veloz
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: pedidos-service
+
+  template:
+    metadata:
+      labels:
+        app: pedidos-service
+
+    spec:
+      containers:
+        - name: pedidos-service
+          image: pedidos-service:latest
+
+          ports:
+            - containerPort: 8080
+
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_HOST
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
