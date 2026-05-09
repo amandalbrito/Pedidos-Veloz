@@ -54,3 +54,9 @@ Cada serviço possui sua própria estrutura e configuração, seguindo o modelo 
 ### 🐳 Ambiente local
 ```bash
 docker compose up --build
+
+```
+
+---
+## 📽️ Vídeo Pitch
+https://youtu.be/V9RjjDb82kM
